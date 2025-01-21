@@ -75,8 +75,7 @@ Whisper Transcription GUI is a desktop application that allows you to transcribe
 
 ## Usage
 
-            1. **Select Input Video**: Click "Browse" to select the video file you want to transcribe.
-
+1. **Select Input Video**: Click "Browse" to select the video file you want to transcribe.
 2. **Set Output Path**: Choose where to save the transcription file (SRT, TXT, or VTT).
 3. **Configure Settings**:
    - **Model Size**: Choose the Whisper model size (tiny, base, small, medium, large).
