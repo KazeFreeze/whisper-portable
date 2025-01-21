@@ -1,0 +1,30 @@
+{
+  "recent_inputs": [
+    "C:/Users/tapir/Downloads/Arc Downloads/School/Philo Lectures/Ph 13 L2 Wallet Debate 27.mov",
+    "C:/Users/tapir/Downloads/Arc Downloads/School/Ph 13 L2 Wallet Debate 27.mov"
+  ],
+  "recent_outputs": [
+    "C:/Users/tapir/Downloads/Arc Downloads/School/Philo Lectures/Ph 13 L2 Wallet Debate 27.srt",
+    "C:/Users/tapir/Downloads/Arc Downloads/School/Philo Lectures/third.srt"
+  ],
+  "processing_history": [
+    {
+      "timestamp": "2025-01-21T08:26:38.982779",
+      "video_size": 269711184.0,
+      "duration": 1611.3333333333333,
+      "model_size": "base",
+      "word_timestamps": false,
+      "segment_length": 2.091397849462366,
+      "processing_time": 3.5560920499999997
+    },
+    {
+      "timestamp": "2025-01-21T08:36:18.158155",
+      "video_size": 269711184.0,
+      "duration": 1611.3333333333333,
+      "model_size": "base",
+      "word_timestamps": false,
+      "segment_length": 1.935483870967742,
+      "processing_time": 3.0530667
+    }
+  ]
+}
