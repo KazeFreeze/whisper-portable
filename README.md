@@ -102,7 +102,7 @@ A template configuration file (`whisper_config_template.json`) is provided. User
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the See the [LICENSE](LICENSE) file for details. file for details.
 
 ## Contributing
 
