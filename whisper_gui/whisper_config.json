@@ -1,9 +1,13 @@
 {
   "recent_inputs": [
+    "C:/Users/tapir/Downloads/Zen Downloads/THEO 13 (2024 S2) LCL 9.G.m4a",
+    "D:/Cloud/Google Drive - Student Ateneo/3rd Year/2nd Sem/Theo 13/1/THEO 13 (2022 S2) Lecture 1-6b - FC 7.m4a",
     "C:/Users/tapir/Downloads/Arc Downloads/School/Philo Lectures/Ph 13 L2 Wallet Debate 27.mov",
     "C:/Users/tapir/Downloads/Arc Downloads/School/Ph 13 L2 Wallet Debate 27.mov"
   ],
   "recent_outputs": [
+    "D:/Cloud/Google Drive - Student Ateneo/3rd Year/2nd Sem/Theo 13/3/9G/output/transcript.srt",
+    "D:/Cloud/Google Drive - Student Ateneo/3rd Year/2nd Sem/Theo 13/1/transcript.srt",
     "C:/Users/tapir/Downloads/Arc Downloads/School/Philo Lectures/Ph 13 L2 Wallet Debate 27.srt",
     "C:/Users/tapir/Downloads/Arc Downloads/School/Philo Lectures/third.srt"
   ],
@@ -25,6 +29,24 @@
       "word_timestamps": false,
       "segment_length": 1.935483870967742,
       "processing_time": 3.0530667
+    },
+    {
+      "timestamp": "2025-02-13T12:41:27.952070",
+      "video_size": 42107524.0,
+      "duration": -1.0,
+      "model_size": "base",
+      "word_timestamps": false,
+      "segment_length": 3.0,
+      "processing_time": 4.255952416666667
+    },
+    {
+      "timestamp": "2025-04-06T15:44:55.414458",
+      "video_size": 67336083.0,
+      "duration": -1.0,
+      "model_size": "base",
+      "word_timestamps": false,
+      "segment_length": 3.0268817204301075,
+      "processing_time": 6.19819455
     }
   ]
 }

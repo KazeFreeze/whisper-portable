@@ -1,4 +1,4 @@
-# whisper_gui/whisper_gui.py
+# whisper_gui/whisper_gui.py --- main.py
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 import whisper
@@ -37,8 +37,8 @@ class WhisperGUI:
         file_frame.grid(row=current_row, column=0, sticky=(tk.W, tk.E), pady=5)
         main_frame.columnconfigure(0, weight=1)
 
-        # Input Video
-        ttk.Label(file_frame, text="Input Video:").grid(
+        # Input File
+        ttk.Label(file_frame, text="Input File:").grid(
             row=0, column=0, sticky=tk.W, pady=5
         )
         self.input_path = tk.StringVar()
@@ -239,7 +239,7 @@ class WhisperGUI:
 
         # Process Button
         self.process_button = ttk.Button(
-            main_frame, text="Process Video", command=self.process_video
+            main_frame, text="Process File", command=self.process_file
         )
         self.process_button.grid(row=current_row, column=0, pady=10)
 
@@ -251,7 +251,15 @@ class WhisperGUI:
 
     def browse_input(self):
         filename = filedialog.askopenfilename(
-            filetypes=[("Video files", "*.mp4 *.avi *.mkv *.mov"), ("All files", "*.*")]
+            filetypes=[
+                (
+                    "Media files",
+                    "*.mp4 *.avi *.mkv *.mov *.mp3 *.wav *.flac *.ogg *.m4a",
+                ),
+                ("Video files", "*.mp4 *.avi *.mkv *.mov"),
+                ("Audio files", "*.mp3 *.wav *.flac *.ogg *.m4a"),
+                ("All files", "*.*"),
+            ]
         )
         if filename:
             self.input_path.set(filename)
@@ -262,6 +270,9 @@ class WhisperGUI:
                 self.output_path.set(
                     os.path.join(output_dir, f"{base_name}.{self.output_format.get()}")
                 )
+
+            # Update estimate after file selection
+            self.update_estimate()
 
     def browse_output(self):
         filename = filedialog.asksaveasfilename(
@@ -288,7 +299,7 @@ class WhisperGUI:
         seconds = int(seconds)
         return f"{hours:02d}:{minutes:02d}:{seconds:02d},{msec:03d}"
 
-    def process_video(self):
+    def process_file(self):
         if not self.input_path.get() or not self.output_path.get():
             messagebox.showerror("Error", "Please select input and output paths")
             return
@@ -308,7 +319,7 @@ class WhisperGUI:
             self.log_message("Loading model...")
             model = whisper.load_model(self.model_size.get())
 
-            self.log_message("Transcribing video...")
+            self.log_message("Transcribing media...")
             result = model.transcribe(
                 self.input_path.get(),
                 language=(
@@ -331,13 +342,12 @@ class WhisperGUI:
             end_time = datetime.datetime.now()
             processing_time = (end_time - start_time).total_seconds() / 60.0
 
-            cap = cv2.VideoCapture(self.input_path.get())
-            duration = cap.get(cv2.CAP_PROP_FRAME_COUNT) / cap.get(cv2.CAP_PROP_FPS)
-            video_size = os.path.getsize(self.input_path.get())
-            cap.release()
+            # Get duration and file size
+            duration = self.get_media_duration(self.input_path.get())
+            file_size = os.path.getsize(self.input_path.get())
 
             self.config_manager.add_processing_record(
-                video_size,
+                file_size,
                 duration,
                 self.model_size.get(),
                 self.word_timestamps.get(),
@@ -359,6 +369,25 @@ class WhisperGUI:
 
         finally:
             self.process_button.state(["!disabled"])
+
+    def get_media_duration(self, file_path):
+        """Get the duration of media file (video or audio)"""
+        try:
+            # Try to open as video first
+            cap = cv2.VideoCapture(file_path)
+            if cap.isOpened():
+                duration = cap.get(cv2.CAP_PROP_FRAME_COUNT) / cap.get(cv2.CAP_PROP_FPS)
+                cap.release()
+                return duration
+            else:
+                # Failed to get video duration, use a default value
+                # Ideally, we would use a library like librosa or pydub for audio files
+                # but keeping dependencies minimal for now
+                self.log_message("Warning: Could not determine media duration")
+                return -1
+        except Exception as e:
+            self.log_message(f"Warning: Error getting media duration - {str(e)}")
+            return -1
 
     def write_output(self, result):
         output_format = self.output_format.get()
@@ -416,21 +445,24 @@ class WhisperGUI:
             return
 
         try:
-            cap = cv2.VideoCapture(self.input_path.get())
-            duration = cap.get(cv2.CAP_PROP_FRAME_COUNT) / cap.get(cv2.CAP_PROP_FPS)
-            cap.release()
+            duration = self.get_media_duration(self.input_path.get())
 
-            estimate = self.config_manager.estimate_processing_time(
-                duration, self.model_size.get(), self.word_timestamps.get()
-            )
-
-            if estimate > 0:
-                self.estimate_label.config(
-                    text=f"Estimated processing time: {estimate:.1f} minutes"
+            if duration > 0:
+                estimate = self.config_manager.estimate_processing_time(
+                    duration, self.model_size.get(), self.word_timestamps.get()
                 )
+
+                if estimate > 0:
+                    self.estimate_label.config(
+                        text=f"Estimated processing time: {estimate:.1f} minutes"
+                    )
+                else:
+                    self.estimate_label.config(
+                        text="Estimated processing time: calculating..."
+                    )
             else:
                 self.estimate_label.config(
-                    text="Estimated processing time: calculating..."
+                    text="Estimated processing time: unknown (new media type)"
                 )
         except Exception as e:
             self.estimate_label.config(text="Estimated processing time: unavailable")

@@ -3,17 +3,17 @@
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-Whisper Transcription GUI is a desktop application that allows you to transcribe video files into text using OpenAI's Whisper model. The tool supports multiple output formats (SRT, TXT, VTT) and provides options for language selection, task type (transcribe or translate), and word-level timestamps.
+Whisper Transcription GUI is a desktop application that allows you to transcribe audio and video files into text using OpenAI's Whisper model. The tool supports multiple output formats (SRT, TXT, VTT) and provides options for language selection, task type (transcribe or translate), and word-level timestamps.
 
 ## Features
 
-- **Video Transcription**: Transcribe video files into text using OpenAI's Whisper model.
+- **Audio & Video Transcription**: Transcribe audio and video files into text using OpenAI's Whisper model.
 - **Multiple Output Formats**: Save transcriptions in SRT, TXT, or VTT formats.
 - **Language Selection**: Supports multiple languages (e.g., English, Chinese, Japanese, etc.) with an "auto" option for automatic language detection.
 - **Task Type**: Choose between transcription or translation tasks.
 - **Word-Level Timestamps**: Optionally include word-level timestamps in the output.
 - **Processing History**: Tracks recent inputs, outputs, and processing history for easy access.
-- **Processing Time Estimation**: Provides an estimate of the time required to process a video based on historical data.
+- **Processing Time Estimation**: Provides an estimate of the time required to process a file based on historical data.
 
 ## Installation
 
@@ -75,15 +75,32 @@ Whisper Transcription GUI is a desktop application that allows you to transcribe
 
 ## Usage
 
-1. **Select Input Video**: Click "Browse" to select the video file you want to transcribe.
+1. **Select Input File**: Click "Browse" to select the audio or video file you want to transcribe.
 2. **Set Output Path**: Choose where to save the transcription file (SRT, TXT, or VTT).
 3. **Configure Settings**:
    - **Model Size**: Choose the Whisper model size (tiny, base, small, medium, large).
-   - **Language**: Select the language of the video or use "auto" for automatic language detection.
+   - **Language**: Select the language of the audio or use "auto" for automatic language detection.
    - **Task**: Choose between "transcribe" (convert speech to text) or "translate" (translate speech to English).
    - **Output Format**: Select the desired output format (SRT, TXT, VTT).
    - **Word-Level Timestamps**: Enable this option to include word-level timestamps in the output.
-4. **Process Video**: Click "Process Video" to start the transcription process. The estimated processing time will be displayed.
+4. **Process File**: Click "Process File" to start the transcription process. The estimated processing time will be displayed.
+
+## Supported File Formats
+
+### Audio Formats
+
+- MP3 (.mp3)
+- WAV (.wav)
+- FLAC (.flac)
+- OGG (.ogg)
+- M4A (.m4a)
+
+### Video Formats
+
+- MP4 (.mp4)
+- AVI (.avi)
+- MKV (.mkv)
+- MOV (.mov)
 
 ## Configuration
 
@@ -102,7 +119,7 @@ A template configuration file (`whisper_config_template.json`) is provided. User
 
 ## License
 
-This project is licensed under the MIT License. See the See the [LICENSE](LICENSE) file for details. file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Contributing
 
